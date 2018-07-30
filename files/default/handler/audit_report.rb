@@ -272,6 +272,8 @@ class Chef
           path = File.expand_path("../../../../#{filename}", __FILE__)
           Chef::Log.info "Writing report to #{path}"
           Reporter::JsonFile.new({ file: path }).send_report(report)
+        elsif reporter == 'cli'
+          Reporter::Cli.new().send_report(report)
         else
           Chef::Log.warn "#{reporter} is not a supported InSpec report collector"
         end
